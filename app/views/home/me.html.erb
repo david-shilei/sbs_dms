@@ -26,6 +26,7 @@
                 </div>
                 <hr/>
                 <div>
+                    <h4><%= @selected_category.name %>:</h4>
                     <% @documents.each do |doc| %>
                         <p>
                             <span><%= doc.title %></span>

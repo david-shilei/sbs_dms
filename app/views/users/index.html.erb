@@ -1,39 +1,35 @@
 <div class="panel panel-default">
   <ol class="breadcrumb">
-    <li><%= link_to "Home", categories_path %></li>
-    <li class="active">Users Index</li>
+    <li><%= link_to "主页", categories_path %></li>
+    <li class="active">用户</li>
   </ol>
 
   <div class="panel-body">
-    <%= link_to "Users awaiting approval", users_path, :approved => "false" %>
+    <%= link_to "只看待批准的用户", users_path, :approved => "false" %>
 
     <div class="container">
       <table class="table">
         <tr>
-          <th> Username </th>
-          <th> Full Name </th>
-          <th> Admin Status </th>
-          <th> Approved </th>
-          <th> Actions </th>
+          <th> 姓名 </th>
+          <th> 批准 </th>
+          <th> 操作 </th>
         </tr>
         <div style="margin-left: 26px"><%= paginate @users %></div>
         <% @users.each do |user| %>
         <tr>
-          <td> <%= link_to user.username, user %> </td>
-          <td> <%= user.full_name %> </td>
-          <td> <%= user.is_admin %> </td>
+          <td> <%= link_to user.username, user %> <%= "*" if user.is_admin? %> </td>
           <td>
               <%= user.approved %>
-              <%= link_to "Approve", approve_user_path(user), :class => "btn btn-primary btn-xs" unless user.approved %>
+              <%= link_to "批准", approve_user_path(user), :class => "btn btn-primary btn-xs" unless user.approved %>
           </td>
           <td> 
-            <% if user.is_admin? %>
-              <%= link_to "Demote", admin_status_user_path(user), :class => "btn btn-primary btn-xs" %>
-            <% else %>
-              <%= link_to "Make Admin", admin_status_user_path(user), :class => "btn btn-primary btn-xs" %>
-            <% end %>
-            <%= link_to "Edit", edit_user_path(user), :class => "btn btn-primary btn-xs" %>
-            <%= link_to "Delete", user_path(user), method: :delete, :class => "btn btn-primary btn-xs" %>
+            <!--<% if user.is_admin? %>-->
+              <!--<%= link_to "Demote", admin_status_user_path(user), :class => "btn btn-primary btn-xs" %>-->
+            <!--<% else %>-->
+              <!--<%= link_to "Make Admin", admin_status_user_path(user), :class => "btn btn-primary btn-xs" %>-->
+            <!--<% end %>-->
+            <!--<%= link_to "Edit", edit_user_path(user), :class => "btn btn-primary btn-xs" %>-->
+            <%= link_to "删除", user_path(user), method: :delete, :class => "btn btn-primary btn-xs" %>
           </td>
         </tr>
         <% end %> 
