@@ -1,0 +1,10 @@
+zh-CN:
+  navigation: 导航
+  documents:
+    level:
+      personal: 仅上传者
+      group_only: 上传者同一系
+      shcool_only: 上传者同一学院
+      free: 所有人
+  requests:
+    created_msg: 申请成功，等待所有者批准

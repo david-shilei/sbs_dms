@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+ <div class="panel-body">
+    <div class="container">
+
+      <h3>
+        <%= @user.name %>
+        <% if @user.is_admin? %>
+           - Flagship Docs Admin 
+        <% end %>
+      </h3>
+
+      <hr />
+
+      <div class="jumbotron">
+          <h4> 详细信息 </h4>
+          <p>邮箱: <%= @user.email %></p>
+          <p>姓名: <%= @user.username %></p>
+          <p>工号: <%= @user.employee_number %></p>
+          <p>院: <%= @user.school.try(:name) %></p>
+          <p>系: <%= @user.group.try(:name) %></p>
+          <p>电话: <%= @user.phone %></p>
+          <p>手机: <%= @user.mobile %></p>
+          <% if @user == current_user %>
+              <%= link_to "编辑", edit_user_path(current_user) %>
+          <% end %>
+      </div>
+
+      <div class="jumbotron">
+        <h4> 上传数据 </h4>
+        <div class="container"> <%= paginate @documents %> </div>
+        <%= render partial: "documents/document_list_item", locals: {docs: @documents} %>
+      </div>
+    </div>
+  </div>
+</div>

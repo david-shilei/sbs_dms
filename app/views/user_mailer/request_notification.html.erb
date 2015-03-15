@@ -1,0 +1,7 @@
+<p><%= @request.owner.username %>,</p>
+
+<p><%= @request.requester.username %> request access to dataset, <%= @request.document.title %>. </p>
+
+<p><%= @request.description %></p>
+
+<p>Click <%= link_to "here", requests_url(@request) %> for details.</p>

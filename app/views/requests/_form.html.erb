@@ -1,0 +1,16 @@
+<div class="modal-body">
+    <%= f.hidden_field :document_id, value: doc.id %>
+    <%= f.hidden_field :requester_id, value: current_user.id %>
+    <%= f.hidden_field :owner_id, value: doc.owner.id %>
+
+    <div class="form-group">
+        <%= f.label :description, "附加信息" %>
+        <%= f.text_field :description, :placeholder => "可以在这里向数据集所有者填写一些情况说明", :class => "form-control" %>
+    </div>
+    <br />
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    <%= f.submit "提交申请", :class => "btn btn-default" %>
+</div>

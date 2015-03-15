@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <%= render partial: "users/user_panel" %>
+        </div>
+
+        <div class="panel panel-default">
+            科研动态
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default text-center">
+            <b><%= link_to "数据资源导航", categories_path %></b>
+
+            <%= render partial: "categories/categories_list.html.erb", locals: {categories: Category.all.sort_by {|c| c.name}} %>
+        </div>
+
+        <div class="panel panel-default">
+            <p class="text-center">数据资源动态 </p>
+            <%= render partial: "documents/documents_news", locals: {docs: @documents} %>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            平台简介
+        </div>
+
+        <div class="panel panel-default">
+            用户指南
+        </div>
+    </div>
+</div>
+

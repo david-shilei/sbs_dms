@@ -1,0 +1,9 @@
+<%= form_tag search_documents_path, method: :post, :class => "navbar-form navbar-left" do %>
+<div class="input-group">
+    <%= search_field_tag :query, nil, style: "width: 400px; margin-left: 25px",
+        :class => "form-control", placeholder: "输入要搜索的数据集名称 ..." %>
+    <div class="input-group-btn">
+        <%= submit_tag "搜索", :class => "btn btn-default"%>
+    </div>
+</div>
+<% end %>

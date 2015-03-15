@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+  <ol class="breadcrumb">
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Categories", categories_path %></li>
+    <li class="active"> <%= "Editing #{@category.name}" %></li>
+  </ol>
+
+  <div class="panel-body">
+  <%= form_for @category, url: category_path(@category), method: :patch do |f| %>
+      <%= render partial: "form", locals: {f: f} %>
+  <% end %>
+  </div>
+</div>

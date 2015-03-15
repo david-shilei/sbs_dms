@@ -1,0 +1,11 @@
+<div class="panel panel-default">
+    <div class="breadcrumb">
+        <h3> <%= "Editing #{@user.name}" %> </h3>
+    </div>
+    <div class="panel-body">
+        <div class="container">
+            <br />
+            <%= render partial: "form", locals: {user: @user} %>
+        </div>
+    </div>
+</div>

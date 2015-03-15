@@ -1,0 +1,57 @@
+<div class="center-block" style= "width: 160px">
+<h2>注册</h2>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="field">
+    <%= f.label :email, "邮箱" %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :username, "用户名" %><br />
+    <%= f.text_field :username %>
+  </div>
+
+  <div class="field">
+    <%= f.label :employee_number, "工号" %><br />
+    <%= f.text_field :employee_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :school_id, "院" %><br />
+    <%= f.select :school_id, options_from_collection_for_select(School.all.collect, 'id', 'name'), include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :group_id, "系" %><br />
+    <%= f.grouped_collection_select :group_id, School.order(:id), :groups, :name, :id, :name, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone, "电话" %><br />
+    <%= f.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= f.label :mobile, "手机" %><br />
+    <%= f.text_field :mobile %>
+  </div>
+
+  <!--<div class="field">-->
+    <!--<%= f.label :password %>-->
+    <!--<% if @validatable %>-->
+    <!--<em>(<%= @minimum_password_length %> characters minimum)</em>-->
+    <% end %><br />
+    <!--<%= f.password_field :password, autocomplete: "off" %>-->
+  <!--</div>-->
+
+  <!--<div class="field">-->
+<!--<%= f.label :password_confirmation %><br />-->
+    <!--<%= f.password_field :password_confirmation, autocomplete: "off" %>-->
+  <!--</div>-->
+
+  <div class="actions">
+    <%= f.submit "注册" %>
+  </div>
+<% end %>
+</div>

@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <%= render partial: "users/user_link" %>
+            <br/>
+            <% if current_user.incoming_requests.size > 0 %>
+                <%= link_to "待批准的请求: #{current_user.incoming_requests.size}", requests_path %>
+            <% end %>
+        </div>
+
+        <div class="panel panel-default">
+            科研新闻
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <b>我的数据集</b><br/>
+            <div class="clearfix">
+                <div>
+                    <% @categories.each do |cat| %>
+                        <!-- Show root categories -->
+                        <span class="<%= "cat-#{cat.id}"%>" style="margin-right: 15spx;" >
+                            <%= link_to "#{cat.name}(#{cat.documents.count})", me_path(category_id: cat.id), style: "font-weight: #{(@selected_category.id && cat.id == @selected_category.id) ? 'bolder' : 'lighter' }" %>
+                        </span>
+                    <% end %>
+                </div>
+                <hr/>
+                <div>
+                    <% @documents.each do |doc| %>
+                        <p>
+                            <span><%= doc.title %></span>
+                            <%= link_to "编辑", edit_document_url(doc) %>
+
+                            <%= link_to "删除", document_url(doc), method: :delete, confirm: "sure?" %>
+                        </p>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            数据集动态
+        </div>
+    </div>
+</div>
+

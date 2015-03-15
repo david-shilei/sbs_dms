@@ -1,0 +1,18 @@
+<table class="table">
+    <tr>
+        <!--<th> Title </th>-->
+        <!--<th> Dataset </th>-->
+        <!--<th> Updated at </th>-->
+    </tr>
+    <% docs.each do |doc| %>
+        <tr>
+            <td> <%= link_to doc.title, document_path(doc) %> </td>
+            <td>
+                <%= link_to doc.category.name, category_path(doc.category) %>
+            </td>
+            <td>
+                <%= DateTime.parse(doc.updated_at.to_s).strftime('%Y-%m-%d %H:%M:%S').to_s %>
+            </td>
+        </tr>
+    <% end %>
+</table>

@@ -1,0 +1,28 @@
+<%= form_for :revision, html: { multipart: true }, url: document_revisions_path(@document), method: :post do |f| %>
+	<div class="modal-body" style="color: #000000">
+	  <p> <b>Document:</b> <%= @document.title %> </p>
+		<p> <b>Description:</b> <%= @document.description %> </p>
+		<p> <b>Category:</b> <%= @document.category.name %> </p>
+		<p> <b>Uploaded by:</b> <%= current_user.full_name %> </p>
+
+		<% if @document.current_revision.file_upload? %> 
+			<hr />
+			<div class="form-group">
+				<%= f.label :file %>
+		  	<%= f.file_field :file %>
+		  </div>
+	  <% elsif @document.current_revision.external_link? %>
+	  	<hr />
+	  	<div class="form-group">
+		  	<%= f.label "External Link" %>
+	      <%= f.text_field :doc_link, placeholder: "https://docs.google.com/document/...", :class => "form-control" %>
+	    </div>
+	  <% end %>
+	  <br />
+
+	  <div class="modal-footer">
+	    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	    <%= f.submit "Submit Revision", :class => "btn btn-primary" %>
+	  </div>
+  </div>
+<% end %>

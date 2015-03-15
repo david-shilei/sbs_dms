@@ -1,0 +1,11 @@
+<div class="clearfix">
+    <div class="pull-left"><%= current_user.username %></div>
+    <div class="pull-right">
+        <% if current_page?("/me") %>
+            <%= link_to "编辑信息", edit_user_path(current_user) %> |
+            <%= link_to "修改密码", edit_user_registration_path %>
+        <% else %>
+            <%= link_to "我的空间", "/me" %>
+        <% end %>
+    </div>
+</div>

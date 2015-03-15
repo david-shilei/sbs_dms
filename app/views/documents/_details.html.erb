@@ -1,0 +1,87 @@
+<!-- Current document revision download and details -->
+<div class="row">
+  <div class="panel panel-default">
+    <ol class="breadcrumb">
+      <% @document.category.ancestors.reverse.each do |cat| %>
+        <li> <%= link_to cat.name, category_path(cat, view_style: params[:view_style]) %> </li>
+      <% end %>
+      <li> <%= link_to @document.category.name, category_path(@document.category, view_style: params[:view_style]) %> </li>
+      <li class="active"> <%= @document.title %> </li>
+    </ol>
+    <div class="panel-body">
+      <div class="container">
+          <p><%= "数据集起始时间: #{I18n.l @document.start}" %></p>
+          <p><%= "数据集终止时间: #{I18n.l @document.end}" %></p>
+          <p><%= "数据集简介: #{@document.description}" %></p>
+
+           <% if can_download_document(@document) %>
+              <!-- Download link -->
+              <%= link_to download_document_path, "data-no-turbolink" => true do %>
+                <%= image_tag "icons/#{document_icon(@document.current_revision.extension_type)}" %>
+                <% if @document.current_revision.file_upload? %>
+                  <b> 点击下载最新数据集 </b>
+                <% elsif @document.current_revision.external_link? %>
+                  <h4> Document from: <%= @document.current_revision.doc_link %> </h4>
+                <% end %>
+              <% end %>
+          <% else %>
+             <span>你没有浏览此数据集的权限</span>
+              <% if current_user %>
+                <%= render partial: "requests/request", locals: {doc: @document} unless can_download_document(@document) %>
+              <% end %>
+          <% end %>
+        </p>
+        <p>
+          <!-- Document details -->
+          <%= "由: #{@document.owner.username}" if !@document.owner.nil? %>
+          <%= "上传于 #{@document.current_revision.updated_at.to_date}" %>
+          <br />
+          <%= "下载次数: #{@document.total_downloads}" %>
+          <br />
+          <% if can_edit_document(@document) %>
+            <br />
+            <%= render partial: "edit_document" %> 
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if can_download_document(@document) %>
+<!-- Past Revisions -->
+<div class="row">
+  <div class="panel panel-default">
+    <ol class="breadcrumb">
+      <li> 数据集版本更新历史 </li>
+      <% if can_revise_document(@document) %>
+        <div class="pull-right"><%= render partial: "revisions/upload.html.erb" %></div>
+      <% end %>
+    </ol>
+    <div class="panel-body">
+      <% if @document.revisions.length > 1 %>
+        <% @document.revisions.order("position asc").each do |revision| %>
+          <% if revision.position != 0 %>
+            <div class= "unstyled_link">
+              <%= link_to download_document_revision_path(document_id: params[:id], revision_id: revision.id), "data-no-turbolink" => true do %>
+                <div class="document_listitem_hover">
+                  <p>
+                    <%= image_tag "icons/#{small_document_icon(revision.extension_type)}" %>
+                    <%= "Revision #{revision.position}" %> 
+                    <span class="pull-right">
+                      <%= "by #{User.find(revision.user_id).name}" if !User.find(revision.user_id).nil? %>
+                      <%= "on #{revision.updated_at.to_date}" %>
+                    </span>
+                  </p>
+                </div>
+             <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p> 改数据集还没有更新过版本 </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

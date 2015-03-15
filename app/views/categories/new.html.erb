@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+  <ol class="breadcrumb">
+    <li><%= link_to "Home", categories_path %></li>
+    <li class="active">New Category</li>
+  </ol>
+
+  <div class="panel-body">
+    <%= form_for @category do |f| %>
+      <div class="container">
+        <%= render partial: "form", locals: {f: f} %>
+      </div>
+    <% end %>
+  </div>
+</div>

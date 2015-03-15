@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <th> 时间 </th>
+                    <th> 请求者 </th>
+                    <th> 数据 </th>
+                    <th> 操作 </th>
+                </tr>
+                <div style="margin-left: 26px"><%= paginate @notifications %></div>
+                <% @notifications.each do |note| %>
+                    <tr>
+                        <td> <%= note.created_at %> </td>
+                        <td> <%= link_to note.from.username, note.from %> </td>
+                        <td> <%= link_to note.document.title, note.document %> </td>
+
+                        <td>
+                            <%= link_to (note.read ? "已读" : "未读"), note, :class => "btn btn-primary btn-xs" %>
+                            <%= link_to "删除", request_path(note), method: :delete, confirm: "确定删除此请求？", :class => "btn btn-primary btn-xs" %>
+                        </td>
+                    </tr>
+                <% end %>
+            </table>
+        </div>
+    </div>
+</div>

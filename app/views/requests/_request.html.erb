@@ -1,0 +1,19 @@
+<a href="" data-toggle="modal" data-target="#requestModal" class="btn btn-primary">
+    <span>向所有者申请</span>
+</a>
+
+<!-- Document upload modal -->
+<div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="documentModal">申请 <%= " - #{doc.title}" %></h4>
+            </div>
+
+            <%= form_for Request.new, html: { multipart: true }, url: requests_path, method: :post do |f| %>
+                <%= render partial: "requests/form", locals: {f: f, doc: doc} %>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+    <ol class="breadcrumb">
+        <li><%= link_to "Home", root_path %></li>
+        <li class="active"> <%= "Editing #{@document.title}" %></li>
+    </ol>
+
+    <div class="panel-body">
+        <%= form_for @document, url: document_path(@document), method: :patch do |f| %>
+        <%= render partial: "form", locals: {f: f, category_id: @document.category.id, include_revision: false} %>
+        <% end %>
+    </div>
+</div>

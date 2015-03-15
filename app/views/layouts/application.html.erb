@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>上海商学院 数据管理系统</title>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+    <%= html_import_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+        <div class="row header">
+            <%= render partial: "layouts/header" %>
+            <!--<p class="notice"><%= notice %></p>-->
+            <!--<p class="alert"><%= alert %></p>-->
+        </div>
+
+        <div class="row">
+            <%= render partial: "layouts/messages" %>
+        </div>
+
+        <div class="container">
+            <%= yield %>
+        </div>
+        <div class="row">
+            <p class="text-center">友情链接</p>
+        </div>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <%= render partial: "users/user_link" %>
+        </div>
+
+        <div class="panel panel-default">
+            <p>数据库:</p>
+            <%= render partial: "categories/categories_list.html.erb", locals: {categories: Category.all.sort_by {|c| c.name}} %>
+
+            <%= link_to "+添加数据库", new_category_path, class: "btn btn-primary btn-xs" %>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h4><%= @category.name %></h4>
+            </div>
+            <div id="subcategory-form-popover" class="pull-right">
+                <% if !current_user.nil? && (current_user.is_admin? || @category.is_owner?(current_user)) %>
+                    <%= link_to "Edit", edit_category_path(@category) %>
+                <% end %>
+            </div>
+        </div>
+
+        <!-- Document upload button & modal -->
+        <%= render partial: "documents/upload" %>
+
+        <%= render partial: "documents/documents_list", locals: {docs: @documents} %>
+    </div>
+</div>

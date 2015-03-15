@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+    <ol class="breadcrumb">
+        <li><%= link_to "Home", root_path %></li>
+        <li class="active">Categories</li>
+    </ol>
+
+    <div class="panel-body">
+        <table class="table">
+            <tr>
+                <th> Category name </th>
+                <th> Owner </th>
+                <th> Actions </th>
+            </tr>
+            <div style="margin-left: 26px"><%= paginate @categories %></div>
+            <% @categories.each do |cat| %>
+                <tr>
+                    <td> <%= link_to cat.name, cat %> </td>
+                    <td>
+                        <% if !cat.owner.nil? %>
+                            <%= link_to cat.owner.username, cat.owner %>
+                        <% else %>
+                            None
+                        <% end %>
+                    </td>
+                    <td>
+                        <%= link_to "Edit", edit_category_path(cat), :class => "btn btn-primary btn-xs" if can_edit_category(cat) %>
+                        <%= link_to "Delete", category_path(cat), method: :delete, :class => "btn btn-primary btn-xs" if can_edit_category(cat) %>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+</div>

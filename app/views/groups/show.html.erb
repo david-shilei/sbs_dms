@@ -1,0 +1,78 @@
+<div class="panel panel-default">
+  <ol class="breadcrumb">
+    <li><%= link_to "Home", categories_path %></li>
+    <li class="active"><%= @group.name %></li>
+    <% if admin? or @group.is_leader?(current_user) %>
+      <div class="pull-right"><%= link_to "Edit", edit_group_path(@group), :class => "btn btn-primary btn-xs" %></div>
+    <% end %>
+  </ol>
+
+  <div class="panel-body">
+    <div class="container">
+      <h3> 
+        <%= @group.name %>
+      </h3>
+      <hr />
+
+      <% if !@categories.empty? %>
+      <%= paginate @categories %>
+      <div class="jumbotron">
+        <h4> Categories </h4>
+        <hr />
+        <div class="container">
+          <ul class="nav nav-pills">
+          <% @categories.each do |category| %>
+            <li> 
+              <%= link_to category do %>
+                <%= image_tag "icons/icon_folder_50.png" %> <%= category.name %>
+              <% end %>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+      <% end %>
+
+      <% if !@leaders.empty? %>
+      <%= paginate @leaders %>
+      <div class="jumbotron">
+        <h4> Leaders </h4>
+        <hr />
+        <div class="container">
+          <ul class="nav nav-pills">
+          <% @leaders.each do |leader| %>
+            <li>
+              <%= link_to leader.user.name, leader.user %>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+      <% end %>
+
+      <% if !@members.empty? %>
+      <%= paginate @members %>
+      <div class="jumbotron">
+        <h4> Members </h4>
+        <hr />
+        <div class="container">
+          <ul class="nav nav-pills">
+          <% @members.each do |member| %>
+            <li>
+              <%= link_to member.user.name, member.user %>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if !@documents. empty? %>
+        <%= paginate @documents %>
+        <br />
+        <h4> Documents Uploaded </h4>
+        <%= render partial: "documents/document_list_item", locals: {docs: @documents} %>
+      <% end %>
+    </div>
+  </div>
+
+</div>

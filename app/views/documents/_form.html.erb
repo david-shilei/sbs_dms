@@ -1,0 +1,55 @@
+<div class="modal-body">
+  <div class="form-group">
+    <%= f.label :title, "数据集名称" %>
+    <%= f.text_field :title, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :code, "数据集代码" %>
+    <%= f.text_field :code, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, "数据集内容简介" %>
+    <%= f.text_field :description, :class => "form-control" %>
+  </div>
+
+    <div class="form-group">
+        <%= f.label :start, "数据集起始时间" %>
+        <%= f.date_select :start, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :end, "数据集终止时间" %>
+        <%= f.date_select :end, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :source, "数据源" %>
+        <%= f.text_field :source, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :level, "共享级别" %>
+        <%= f.select :level, Document.levels.collect{|k, v| [I18n.t("documents.level.#{k}"), k]}, :class => "form-control" %>
+        <br/>
+        <span style="font-size: 10px"> 此选项决定哪些用户可以下载该数据集</span>
+    </div>
+
+  <!-- Category the document is uploaded to -->
+  <%= f.hidden_field :category_id, value: category_id %>
+
+  <!-- Upload file for document creation, hide for document editing -->
+  <% if include_revision %>
+    <%= f.fields_for :revision do |rev| %>
+      <%= f.label :file, "文件" %>
+      <%= rev.file_field :file %>
+    <% end %>
+  <% end %>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+  <%= f.submit "提交数据集", :class => "btn btn-default" %>
+</div>

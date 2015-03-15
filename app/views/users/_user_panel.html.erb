@@ -1,0 +1,27 @@
+<div>
+    <% if current_user %>
+        <P>欢迎， <%= current_user.username %></P>
+        <%= link_to "我的空间", "me" %> |
+        <%= link_to "登出", "/users/sign_out", :method => :delete %>
+    <% else %>
+        <p>用户登录</p>
+        <%= form_for(:user, url: session_path(:user)) do |f| %>
+        <div class="field">
+            <%= f.label :email, "邮箱" %><br />
+            <%= f.email_field :email, autofocus: true %>
+        </div>
+
+        <div class="field">
+            <%= f.label :password, "密码" %><br />
+            <%= f.password_field :password, autocomplete: "off" %>
+        </div>
+        <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me, "记住我" %>
+        </div>
+        <div class="actions">
+            <%= f.submit "登录" %> | <%= link_to "注册", new_registration_path("user") %>
+        </div>
+        <% end %>
+    <% end %>
+</div>

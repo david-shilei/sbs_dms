@@ -1,0 +1,28 @@
+<div class="container">
+  <%= form_for user do |f| %>
+    <div class="row">
+      <div class="col-sm-2">
+        <p><%= f.label :username, '姓名' %> </p>
+        <p><%= f.label :employee_number, '工号' %> </p>
+        <p><%= f.label :email, '邮箱' %> </p>
+        <p><%= f.label :phone, '电话' %> </p>
+        <p><%= f.label :phone, '手机' %> </p>
+
+
+      </div>
+      <div class="col-md-6">
+          <p><%= f.label user.username %> </p>
+          <p><%= user.employee_number || "空" %> </p>
+          <p><%= f.text_field :email %> </p>
+          <p><%= f.text_field :phone %> </p>
+          <p><%= f.text_field :mobile %> </p>
+      </div>
+    </div>
+    <hr/>
+    <div class="row">
+      <div class="col-sm-2">
+        <%= f.submit "更新", :class => "btn btn-sm btn-default" %>
+      </div> 
+    </div>
+  <% end %>
+</div>

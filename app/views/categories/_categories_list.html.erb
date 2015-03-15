@@ -1,0 +1,9 @@
+<!-- Category list -->
+<ul style="list-style-type: none; padding-left: 10px;" class="categories_nav" >
+    <% categories.each do |cat| %>
+        <!-- Show root categories -->
+        <li class="<%= "cat-#{cat.id}"%>" style="padding: 2px 0 2px 0" >
+                <%= link_to cat.name, category_path(cat) %>
+        </li>
+    <% end %>
+</ul>

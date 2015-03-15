@@ -1,0 +1,16 @@
+<h3> <%= "#{params[:query]} 的搜索结果" %> </h3>
+<hr />
+<div class="panel panel-default">
+  <ol class="breadcrumb">
+    <li> 匹配的数据集 </li>
+  </ol>
+  <div class="panel-body" style="padding: 0px">
+
+    <% if !@documents.nil? %>
+      <% @documents.each_hit_with_result do |hit, result| %>
+        <%= link_to result.title, result %>
+        <br />
+      <% end %>
+    <% end %>
+  </div>
+</div>

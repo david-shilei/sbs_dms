@@ -1,0 +1,20 @@
+<div class="clearfix">
+    <div class="pull-left">
+        <p>
+            <b><%= link_to doc.title, doc %></b>
+            (<%= link_to "详细", doc %> |
+            <%= link_to "下载", download_document_revision_path(document_id: doc.id, revision_id: doc.current_revision.id) %>)
+            <br/>
+            <%= "数据集起始时间: #{I18n.l doc.start}" %><br/>
+            <%= "数据集终止时间: #{I18n.l doc.end}" %><br/>
+            <%= "数据集简介: #{doc.description}" %><br/>
+            <%= "数据集更新于: #{doc.current_revision.updated_at.to_date}" %><br/>
+            <% if !doc.owner.username.nil? %>
+                <%= "由 #{doc.owner.username} 上传" %>
+            <% end %>
+    </div>
+
+    <div class="pull-right">
+        <%= image_tag "icons/#{small_document_icon(doc.current_revision.extension_type)}" %>
+    </div>
+</div>
