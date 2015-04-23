@@ -23,6 +23,7 @@
     registrations:
       user:
         updated: '用户信息已更改'
+        signed_up_but_not_approved: '注册成功，等待管理员批准'
     sessions:
       signed_in: '登录成功。'
       signed_out: '退出成功。'

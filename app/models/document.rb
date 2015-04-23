@@ -3,8 +3,8 @@ class Document < ActiveRecord::Base
   enum level: { personal: 0, group_only: 1, shcool_only: 2, free: 99 }
   belongs_to :owner, class_name: "User", foreign_key: "user_id"
   belongs_to :category
-  has_many :revisions, dependent: :destroy
-  has_many :requests, dependent: :destroy
+  has_many :revisions#, dependent: :destroy
+  has_many :requests#, dependent: :destroy
 
   validates_presence_of :category
 

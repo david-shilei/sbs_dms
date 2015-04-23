@@ -88,7 +88,7 @@ module Permissions
     return true if current_user.is_admin?
     # current user is a member of the owner's group
 
-    return current_user.member_of(document.category.group.id) if !document.category.group.nil?
+    return document.owner == current_user
     # User is not an admin and not a member of the category's group
     return false
   end

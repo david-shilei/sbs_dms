@@ -90,22 +90,23 @@ class DocumentsController < ApplicationController
     if !can_edit_document(@document)
       flash[:error] = "You are not allowed to edit this document."
       redirect_to "/"
-    end
-    # Check if document attributes have successfully saved
-    if @document.update_attributes(document_params)
-      flash[:success] = "Document updated!"
-      redirect_to @document
     else
-      flash[:error] = "Document failed to update: #{@document.errors.full_messages.to_sentence}" 
-      redirect_to @document
+      # Check if document attributes have successfully saved
+      if @document.update_attributes(document_params)
+        flash[:success] = "Document updated!"
+        redirect_to @document
+      else
+        flash[:error] = "Document failed to update: #{@document.errors.full_messages.to_sentence}"
+        redirect_to @document
+      end
     end
   end
 
   def destroy 
     @document = Document.find(params[:id])
-    @category = @document.category
+    # @category = @document.category
     @document.destroy
-    redirect_to @category
+    redirect_to me_path
   end
 
   private

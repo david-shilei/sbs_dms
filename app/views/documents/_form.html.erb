@@ -37,7 +37,7 @@
     </div>
 
   <!-- Category the document is uploaded to -->
-  <%= f.hidden_field :category_id, value: category_id %>
+  <%= f.hidden_field :category_id, value: @document ? @document.category_id : category_id %>
 
   <!-- Upload file for document creation, hide for document editing -->
   <% if include_revision %>
@@ -50,6 +50,8 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+  <% if @document.nil? %>
+    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+  <% end %>
   <%= f.submit "提交数据集", :class => "btn btn-default" %>
 </div>

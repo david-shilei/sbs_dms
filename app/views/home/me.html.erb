@@ -16,23 +16,27 @@
         <div class="panel panel-default">
             <b>我的数据集</b><br/>
             <div class="clearfix">
-                <div>
+                <ul>
                     <% @categories.each do |cat| %>
                         <!-- Show root categories -->
+                        <li>
                         <span class="<%= "cat-#{cat.id}"%>" style="margin-right: 15spx;" >
                             <%= link_to "#{cat.name}(#{cat.documents.count})", me_path(category_id: cat.id), style: "font-weight: #{(@selected_category.id && cat.id == @selected_category.id) ? 'bolder' : 'lighter' }" %>
                         </span>
+                        </li>
                     <% end %>
-                </div>
+                </ul>
                 <hr/>
                 <div>
-                    <h4><%= @selected_category.name %>:</h4>
+                    <% if @selected_category %>
+                        <h4><%= @selected_category.name %>:</h4>
+                    <% end %>
                     <% @documents.each do |doc| %>
                         <p>
                             <span><%= doc.title %></span>
                             <%= link_to "编辑", edit_document_url(doc) %>
 
-                            <%= link_to "删除", document_url(doc), method: :delete, confirm: "sure?" %>
+                            <%= link_to "删除", document_url(doc), method: :delete, data: {confirm: "确定删除?"} %>
                         </p>
                     <% end %>
                 </div>
