@@ -32,4 +32,16 @@ class HomeController < ApplicationController
       @documents = []
     end
   end
+
+  def intro
+
+  end
+
+  def guide
+
+  end
+
+  def news
+
+  end
 end

@@ -4,7 +4,7 @@
             <%= render partial: "users/user_link" %>
             <br/>
             <% if current_user.incoming_requests.size > 0 %>
-                <%= link_to "待批准的请求: #{current_user.incoming_requests.size}", requests_path %>
+                <%= link_to "待批准的请求: #{current_user.incoming_requests.select{|r| r.document}.size}", requests_path %>
             <% end %>
         </div>
 

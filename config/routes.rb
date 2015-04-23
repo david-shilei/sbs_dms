@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
   root to: "home#index"
   get "me", to: "home#me"
+  get "intro", to: "home#intro"
+  get "guide", to: "home#guide"
+  get "news", to: "home#news"
 
   resources :groups do 
     member do
